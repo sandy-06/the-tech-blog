@@ -9,9 +9,14 @@ class Comments extends Model {
 
 Comments.init(
   {
-   
+    id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
     
-    body: {
+    contents: {
       type: DataTypes.STRING,
       allowNull: false,
       
@@ -22,6 +27,10 @@ Comments.init(
   
    {
     sequelize,
+    timestamps: true,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'comment',
    
 }
 );

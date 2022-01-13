@@ -21,8 +21,8 @@ class Post extends Model {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      body: {
-        type: DataTypes.STRING,
+      contents: {
+        type: DataTypes.TEXT,
         allowNull: false,
         
         },
@@ -32,6 +32,10 @@ class Post extends Model {
     
      {
       sequelize,
+      timestamps: true,
+      freezeTableName: true,
+      underscored: true,
+      modelName: 'post',
      
 }
   );
