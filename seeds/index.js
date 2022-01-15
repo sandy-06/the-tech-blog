@@ -10,12 +10,15 @@ async function main(){
 }
 
 async function generateUsers(){
-    await User.create({
-        username: faker.name.findName(),
-        email: faker.internet.email(),
-        password: 'whatever'
-
-    })
+    for( let i = 0; i < 10; i++){
+        await User.create({
+            username: faker.name.findName(),
+            email: faker.internet.email(),
+            password: 'whatever'
+    
+        })
+    }
+    
 
 }
 
@@ -23,11 +26,15 @@ async function generatePosts(){
     const users = await User.findAll({})
     users.map(async user => {
         // generate posts, insert them
-        await Post.create({
-            user_id: user.id,
-            title: faker.commerce.product(),
-            content: faker.commerce.productDescription()
-        })
+for(let i =0; i<4; i++){
+    await Post.create({
+        userId: user.id,
+        title: faker.commerce.product(),
+        contents: faker.commerce.productDescription()
+    })
+}
+
+        
     })
 
 }
@@ -35,15 +42,20 @@ async function generatePosts(){
 async function generateComments(){
     const users = await User.findAll({})
     const posts = await Post.findAll({})
-
-    users.map(async user => {
-        posts.map(async post => {
-            await Comment.create({
-                user_id: user.id,
-                post_id: post.id,
-                content: faker.commerce.productMaterial()
+    for(let i =0; i < 2; i++){
+        await users.map(async user => {
+            await posts.map(async post => {
+                await Comment.create({
+                    userId: user.id,
+                    postId: post.id,
+                    contents: faker.commerce.productMaterial()
+                })
+    
             })
-
         })
-    })
+    }
+
+  
 }
+
+main();

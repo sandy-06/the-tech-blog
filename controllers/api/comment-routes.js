@@ -4,7 +4,7 @@ const { Comment } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
-    const Comment = await Comment.findAll({});
+    const comments = await Comment.findAll({});
     res.status(200).json(comments);     
     
   } catch (err) {
