@@ -1,9 +1,16 @@
 {{#each posts as |post|}}
-<div>
-    <a href="/post/{{post.id}}" {{post.title}}</h2>
-    <p>{{post.contents}}</p>
-    <P>{{post.createdAt</P>
+<div class= "card">
+    <div class="card-header">
+        <a href="/post/{{post.id}}"> {{post.title}}</a>
+    </div>
+    <div class="card-body">
+            <p>{{post.contents}}</p>
+    </div>
+<div class="date">
+    <P>{{post.createdAt}}</P>
 </div>
+</div>
+    
 
 {{/each}}
 
