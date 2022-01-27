@@ -7,7 +7,8 @@ router.get('/', async (req, res) => {
   try {
     const dbPostData = await Post.findAll({})
     const posts = dbPostData.map((post) => post.get({ plain: true }));
-    res.render('homepage', { posts });
+    console.log(req.session.loggedIn);
+    res.render('homepage', { posts, loggedIn: req.session.loggedIn  });
   }catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -36,6 +37,17 @@ router.get('/post/id', async (req, res) => {
   }
       });
 
+      router.get('/singlePost/:id', async (req, res) => {
+        try{
+          const post = await Post.findByPk(req.params.id,{
+            raw: true
+          });
+          console.log(post)
+          res.render('singlePost', {post: post});
+        }catch (err) {
+          console.log(err);
+        }
+            });
   
       
 
