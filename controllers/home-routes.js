@@ -5,8 +5,10 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
+    console.log('hello')
     const dbPostData = await Post.findAll({})
     const posts = dbPostData.map((post) => post.get({ plain: true }));
+    console.log(posts)
     console.log(req.session.loggedIn);
     res.render('homepage', { posts, loggedIn: req.session.loggedIn  });
   }catch (err) {
@@ -43,13 +45,26 @@ router.get('/post/id', async (req, res) => {
             raw: true
           });
           console.log(post)
-          res.render('singlePost', {post: post});
+          res.render('singlePost', {post: post });
         }catch (err) {
           console.log(err);
         }
             });
   
-      
+   router.get('/dashboard', async (req, res) => {
+    try{
+      const post = await Post.findAll(
+        {
+          where: { userId: req.session.userId}
+        },{
+        raw: true
+      });
+      res.render('dashboard', {posts: post, loggedIn: req.session.loggedIn});
+    }catch (err) {
+      console.log(err);
+    } 
+     
+   } )   
 
 
 module.exports = router;
