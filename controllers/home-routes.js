@@ -51,20 +51,8 @@ router.get('/post/id', async (req, res) => {
         }
             });
   
-   router.get('/dashboard', async (req, res) => {
-    try{
-      const post = await Post.findAll(
-        {
-          where: { userId: req.session.userId}
-        },{
-        raw: true
-      });
-      res.render('dashboard', {posts: post, loggedIn: req.session.loggedIn});
-    }catch (err) {
-      console.log(err);
-    } 
-     
-   } )   
+   
+    
 
 
 module.exports = router;

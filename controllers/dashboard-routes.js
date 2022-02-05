@@ -11,7 +11,7 @@ router.get('/', withAuth, (req, res) => {
        }
    }) .then(dbPostData => {
        console.log("we are here",dbPostData)
-       res.render("dashboard", dbPostData)
+       res.render("dashboard", {posts: dbPostData})
    })
 })
 module.exports = router;

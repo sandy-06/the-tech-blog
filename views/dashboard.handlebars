@@ -21,8 +21,8 @@
     {{#each posts as |post|}}
     <li>
    {{!-- {{> post-info post}} --}}
-  <p>{{post.title}}</p>
-  <p>{{post.contents}}</p>
+  <p>{{post.dataValues.title}}</p>
+  <p>{{post.dataValues.contents}}</p>
       {{!-- <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a> --}}
     </li>
     {{/each}}

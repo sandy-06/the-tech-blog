@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection');
-
+const  {format_date} = require('../utils/helpers');
 
 //post a blog,title content date created
 class Post extends Model {
@@ -27,9 +27,9 @@ class Post extends Model {
         
         },
         createdAt: {
-          type: Date,
-          default: Date.now,
-          get: createdAtVal => dateFormat(createdAtVal)
+          type: DataTypes.DATE,
+          default: sequelize.literal('NOW()'),
+         // get: createdAtVal => format_date(createdAtVal)
         },
         
     },
