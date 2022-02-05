@@ -26,8 +26,12 @@ class Post extends Model {
         allowNull: false,
         
         },
-      
-      
+        createdAt: {
+          type: Date,
+          default: Date.now,
+          get: createdAtVal => dateFormat(createdAtVal)
+        },
+        
     },
     
      {
@@ -37,7 +41,7 @@ class Post extends Model {
       underscored: true,
       modelName: 'post',
      
-}
+    }
   );
   
   module.exports = Post;
