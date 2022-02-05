@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../models')
+const { Post, Comment, User } = require('../models')
 // Import the custom middleware
 const withAuth = require('../utils/auth');
 
@@ -10,12 +10,12 @@ router.get('/', async (req, res) => {
     const posts = dbPostData.map((post) => post.get({ plain: true }));
     console.log(posts)
     console.log(req.session.loggedIn);
-    res.render('homepage', { posts, loggedIn: req.session.loggedIn  });
-  }catch (err) {
+    res.render('homepage', { posts, loggedIn: req.session.loggedIn });
+  } catch (err) {
     console.log(err);
     res.status(500).json(err);
-  }    
-      
+  }
+
 });
 
 
@@ -28,31 +28,29 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/post/id', async (req, res) => {
-  try{
-    const post = await Post.findByPk(req.params.id,{
-      raw: true
+
+
+router.get('/singlePost/:id', async (req, res) => {
+  try {
+    const post = await Post.findByPk(req.params.id, {
+      
+      include: [
+        User,
+        {
+          model: Comment, 
+          include: [User]
+        }
+      ]
     });
-    res.render('post', {post: post});
-  }catch (err) {
+    console.log('this is a post', post)
+    res.render('singlePost', { post: post, loggedIn: req.session.loggedIn });
+  } catch (err) {
     console.log(err);
   }
-      });
+});
 
-      router.get('/singlePost/:id', async (req, res) => {
-        try{
-          const post = await Post.findByPk(req.params.id,{
-            raw: true
-          });
-          console.log(post)
-          res.render('singlePost', {post: post });
-        }catch (err) {
-          console.log(err);
-        }
-            });
-  
-   
-    
+
+
 
 
 module.exports = router;

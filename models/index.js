@@ -21,7 +21,7 @@ Post.hasMany(Comment, {
 })
 User.hasMany(Comment);
 
-Comment.belongsTo(User);
+
 
 
 
