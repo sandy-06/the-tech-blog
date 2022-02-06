@@ -1,25 +1,25 @@
-{{ post.title}}
+{{post.title}}
 
-{{ post.contents }}
-
-
+{{post.contents}}
 
 {{#if loggedIn}}
-<form class="comment-form">
-  <div class= "form">
-    <textarea name="comment-body">enter comment here</textarea>
-  </div>
+  <form class="comment-form">
+    <div class="form">
+      <div class="card">
+        <textarea name="comment-body">enter comment here</textarea>
+      </div>
+    </div>
 
-  <div>
-    <button type="submit">add comment</button>
-    
-  </div>
-</form>
+    <div>
+      <button type="submit">add comment</button>
+
+    </div>
+  </form>
 {{/if}}
 
-{{  post.comments }}
+{{post.comments}}
 
 {{#if loggedIn}}
-<script src="/javascript/comment.js"></script>
+  <script src="/javascript/comment.js"></script>
 
 {{/if}}

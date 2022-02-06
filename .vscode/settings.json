@@ -3,6 +3,7 @@
         "codebases",
         "exphbs",
         "jass",
+        "JAWSDB",
         "resave",
         "Signup",
         "templating"
